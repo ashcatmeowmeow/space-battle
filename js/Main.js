@@ -36,9 +36,9 @@ function updateAll() {
 }
 
 function moveAll() {
-	ship.move();
+	ship.move(UFO);
 	UFO.move();
-	ship.checkMyShipAndShotCollisionAgainst(UFO);
+	ship.checkMyShipCollisonAgainst(UFO);
 }
 
 function drawAll() {

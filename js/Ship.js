@@ -49,22 +49,15 @@ function shipClass() {
 		this.myShotArray.push(tempShot);
 	}
 
-  this.checkMyShipAndShotCollisionAgainst = function(thisEnemy) {
+  this.checkMyShipCollisonAgainst = function(thisEnemy) {
     if( thisEnemy.isOverlappingPoint(this.x,this.y) ) {
       this.reset();
       document.getElementById("debugText").innerHTML = "Player Crashed!";
     }
-    /*
-    if( this.myShot.hitTest(thisEnemy) ) {
-      thisEnemy.reset();
-      this.myShot.reset();
-      document.getElementById("debugText").innerHTML = "Enemy Blasted!";
-    }
-    */
   }
 
 	this.superClassMove = this.move;
-	this.move = function() {
+	this.move = function(thisEnemy) {
 
 		if(this.keyHeld_Gas) {
 			this.xv += Math.cos(this.ang) * THRUST_POWER;
@@ -86,16 +79,19 @@ function shipClass() {
 			if(this.myShotArray[i].isShotReadyToFire()){
 				this.myShotArray[i].shootFrom(this);
 			}
+      if( this.myShotArray[i].hitTest(thisEnemy) ) {
+        thisEnemy.reset();
+        this.myShotArray[i].reset();
+        document.getElementById("debugText").innerHTML = "Enemy Blasted!";
+      }
 			this.myShotArray[i].move();
 		}
 	}
 
-  this.iterateThroughShotArray = function(){
-
-  }
-
 	this.draw = function() {
-		//this.myShot.draw();
+    for(var i = 0; i< this.myShotArray.length; i++){
+      this.myShotArray[i].draw();
+    }
 		drawBitmapCenteredWithRotation(this.myShipPic, this.x,this.y, this.ang);
 	}
 }
