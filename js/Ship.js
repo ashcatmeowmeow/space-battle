@@ -6,7 +6,7 @@ shipClass.prototype = new movingWrapPositionClass();
 
 function shipClass() {
 
-	this.myShot	=	new	shotClass();
+	this.myShotArray = [];
 
 	this.x = canvas.width/2;
 	this.y = canvas.height/2;
@@ -41,13 +41,12 @@ function shipClass() {
 		this.speed = 0;
 		this.x = canvas.width/2;
 		this.y = canvas.height/2;
-		this.myShot.reset();
 	} // end of shipReset func
 
 	this.cannonFire = function(){
-		if(this.myShot.isShotReadyToFire()){
-			this.myShot.shootFrom(this);
-		}
+		var tempShot = new shotClass();
+		tempShot.reset();
+		this.myShotArray.push(tempShot);
 	}
 	this.superClassMove = this.move;
 	this.move = function() {
@@ -67,19 +66,12 @@ function shipClass() {
     this.yv *= SPACESPEED_DECAY_MULT;
 
 		this.superClassMove();
-		this.myShot.move();
-	}
-
-	this.checkMyShipAndShotCollisionAgainst = function(thisEnemy){
-		if(thisEnemy.isOverlappingPoint(this.x, this.y)){
-			this.reset();
-			document.getElementById("debugText").innerHTML = "u ded.";
-		}
-
-		if(this.myShot.hitTest(thisEnemy)) {
-			thisEnemy.reset();
-			this.myShot.reset();
-			document.getElementById("debugText").innerHTML = "get wrecked.";
+		//NEED TO ITERATE THROUGH THE SHOT ARRAY
+		for(var i = 0; i< this.myShotArray.length; i++){
+			if(this.myShotArray[i].isShotReadyToFire()){
+				this.myShotArray[i].shootFrom(this);
+			}
+			this.myShotArray[i].move();
 		}
 	}
 
