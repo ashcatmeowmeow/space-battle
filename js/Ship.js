@@ -85,8 +85,10 @@ function shipClass() {
         document.getElementById("debugText").innerHTML = "Enemy Blasted!";
       }
 			this.myShotArray[i].move();
+      //TODO need to kill shots after shotlife or hit.
       if(this.myShotArray[i].shotLife <= 0){
-        this.myShotArray[i].reset();
+        //this.myShotArray[i].reset();
+        delete this.myShotArray[i];
       }
 		}
 	}
