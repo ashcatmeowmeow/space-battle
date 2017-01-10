@@ -85,6 +85,9 @@ function shipClass() {
         document.getElementById("debugText").innerHTML = "Enemy Blasted!";
       }
 			this.myShotArray[i].move();
+      if(this.myShotArray[i].shotLife <= 0){
+        this.myShotArray[i].reset();
+      }
 		}
 	}
 
