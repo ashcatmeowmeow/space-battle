@@ -66,8 +66,9 @@ function keyPressed(evt) {
 	// console.log("Key pressed: "+evt.keyCode);
 	keySet(evt, true);
 	if (!repeat) {
-		console.log('it worked');
+		if(evt.keyCode	== ship.controlKeyForShotFire) {
 		ship.cannonFire(UFO);
+		}
 		repeat = true;
 	}
 	//console.log(evt.keyCode);

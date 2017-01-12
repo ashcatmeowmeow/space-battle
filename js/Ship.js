@@ -77,7 +77,6 @@ function shipClass() {
 
   this.iterateThroughShotArray = function(thisEnemy){
     for(var i = 0; i< this.myShotArray.length; i++){
-      console.log(i);
       if(this.myShotArray[i].isShotReadyToFire()){
         this.myShotArray[i].shootFrom(this);
       }
@@ -86,18 +85,22 @@ function shipClass() {
         this.myShotArray[i].reset();
         document.getElementById("debugText").innerHTML = "Enemy Blasted!";
       }
-      this.myShotArray[i].move();
-      //TODO need to kill shots after shotlife or hit.
-      if(this.myShotArray[i].shotLife <= 0){
-        //this.myShotArray[i].reset();
-        //delete this.myShotArray[i];
+      if(this.myShotArray[i].shotLife > 0){
+        this.myShotArray[i].move();
       }
+    }
+    for(var i = this.myShotArray.length-1; i >= 0; i--){
+     if(this.myShotArray[i].shotLife < 1){
+       this.myShotArray.splice(i,1);
+     }
     }
   }
 
 	this.draw = function() {
     for(var i = 0; i< this.myShotArray.length; i++){
-      this.myShotArray[i].draw();
+      if(this.myShotArray[i].shotLife > 0){
+        this.myShotArray[i].draw();
+      }
     }
 		drawBitmapCenteredWithRotation(this.myShipPic, this.x,this.y, this.ang);
 	}
