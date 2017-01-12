@@ -21,6 +21,8 @@ function shipClass() {
 	this.keyHeld_TurnLeft = false;
 	this.keyHeld_TurnRight = false;
 
+  this.keyHeld_Fire = false;
+
 	this.controlKeyUp;
 	this.controlKeyRight;
 	this.controlKeyDown;
@@ -31,7 +33,7 @@ function shipClass() {
 		this.controlKeyRight = rightKey;
 		this.controlKeyDown = downKey;
 		this.controlKeyLeft = leftKey;
-		this.controlKeyForShotFire = shotKey
+		this.controlKeyForShotFire = shotKey;
 	}
 
 	this.superClassReset = this.reset;
@@ -42,12 +44,6 @@ function shipClass() {
 		this.x = canvas.width/2;
 		this.y = canvas.height/2;
 	} // end of shipReset func
-
-	this.cannonFire = function(){
-		var tempShot = new shotClass();
-		tempShot.reset();
-		this.myShotArray.push(tempShot);
-	}
 
   this.checkMyShipCollisonAgainst = function(thisEnemy) {
     if( thisEnemy.isOverlappingPoint(this.x,this.y) ) {
@@ -74,24 +70,30 @@ function shipClass() {
     this.yv *= SPACESPEED_DECAY_MULT;
 
 		this.superClassMove();
+    this.iterateThroughShotArray(thisEnemy);
 		//NEED TO ITERATE THROUGH THE SHOT ARRAY
-		for(var i = 0; i< this.myShotArray.length; i++){
-			if(this.myShotArray[i].isShotReadyToFire()){
-				this.myShotArray[i].shootFrom(this);
-			}
+
+	}
+
+  this.iterateThroughShotArray = function(thisEnemy){
+    for(var i = 0; i< this.myShotArray.length; i++){
+      console.log(i);
+      if(this.myShotArray[i].isShotReadyToFire()){
+        this.myShotArray[i].shootFrom(this);
+      }
       if( this.myShotArray[i].hitTest(thisEnemy) ) {
         thisEnemy.reset();
         this.myShotArray[i].reset();
         document.getElementById("debugText").innerHTML = "Enemy Blasted!";
       }
-			this.myShotArray[i].move();
+      this.myShotArray[i].move();
       //TODO need to kill shots after shotlife or hit.
       if(this.myShotArray[i].shotLife <= 0){
         //this.myShotArray[i].reset();
-        delete this.myShotArray[i];
+        //delete this.myShotArray[i];
       }
-		}
-	}
+    }
+  }
 
 	this.draw = function() {
     for(var i = 0; i< this.myShotArray.length; i++){
@@ -99,4 +101,14 @@ function shipClass() {
     }
 		drawBitmapCenteredWithRotation(this.myShipPic, this.x,this.y, this.ang);
 	}
+
+  this.cannonFire = function(thisEnemy){
+    if(this.myShotArray.length < 5) {
+      var tempShot = new shotClass();
+      tempShot.reset();
+      this.myShotArray.push(tempShot);
+      //this.iterateThroughShotArray(thisEnemy);
+      //TODO if myShotArray.length > 5 pop the last one off.
+    }
+  }
 }

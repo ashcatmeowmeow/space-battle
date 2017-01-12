@@ -16,8 +16,15 @@ var mouseY = 0;
 function setupInput() {
 	canvas.addEventListener('mousemove', updateMousePos);
 
+	var repeat = false;
+
 	document.addEventListener('keydown', keyPressed);
 	document.addEventListener('keyup', keyReleased);
+
+	document.addEventListener("keyup", function() { repeat = false; });
+	document.addEventListener("keydown", function() {
+
+	});
 
 	ship.setupInput(KEY_UP_ARROW, KEY_RIGHT_ARROW, KEY_DOWN_ARROW, KEY_LEFT_ARROW, KEY_SPACEBAR);
 }
@@ -50,18 +57,25 @@ function keySet(keyEvent, setTo) {
 		ship.keyHeld_Reverse = setTo;
 	}
 	if(keyEvent.keyCode	== ship.controlKeyForShotFire) {
-  	ship.cannonFire();
+		ship.keyHeld_Fire = setTo;
 	}
 }
+
 
 function keyPressed(evt) {
 	// console.log("Key pressed: "+evt.keyCode);
 	keySet(evt, true);
-
+	if (!repeat) {
+		console.log('it worked');
+		ship.cannonFire(UFO);
+		repeat = true;
+	}
+	//console.log(evt.keyCode);
 	evt.preventDefault();
 }
 
 function keyReleased(evt) {
 	// console.log("Key pressed: "+evt.keyCode);
 	keySet(evt, false);
+	repeat = false;
 }
