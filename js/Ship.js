@@ -1,6 +1,7 @@
 const SPACESPEED_DECAY_MULT = 0.99;
 const THRUST_POWER = 0.15;
 const TURN_RATE = 0.03;
+const NUMBER_OF_SHOTS = 5;
 
 shipClass.prototype = new movingWrapPositionClass();
 
@@ -45,6 +46,7 @@ function shipClass() {
 		this.y = canvas.height/2;
 	} // end of shipReset func
 
+
   this.checkMyShipCollisonAgainst = function(thisEnemy) {
     if( thisEnemy.isOverlappingPoint(this.x,this.y) ) {
       this.reset();
@@ -70,9 +72,8 @@ function shipClass() {
     this.yv *= SPACESPEED_DECAY_MULT;
 
 		this.superClassMove();
+		this.checkMyShipCollisonAgainst(thisEnemy);
     this.iterateThroughShotArray(thisEnemy);
-		//NEED TO ITERATE THROUGH THE SHOT ARRAY
-
 	}
 
   this.iterateThroughShotArray = function(thisEnemy){
@@ -106,12 +107,10 @@ function shipClass() {
 	}
 
   this.cannonFire = function(thisEnemy){
-    if(this.myShotArray.length < 5) {
+    if(this.myShotArray.length < NUMBER_OF_SHOTS) {
       var tempShot = new shotClass();
       tempShot.reset();
       this.myShotArray.push(tempShot);
-      //this.iterateThroughShotArray(thisEnemy);
-      //TODO if myShotArray.length > 5 pop the last one off.
     }
   }
 }

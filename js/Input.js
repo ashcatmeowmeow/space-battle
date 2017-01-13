@@ -12,6 +12,7 @@ const KEY_D = 68;
 
 var mouseX = 0;
 var mouseY = 0;
+var repeat;
 
 function setupInput() {
 	canvas.addEventListener('mousemove', updateMousePos);
