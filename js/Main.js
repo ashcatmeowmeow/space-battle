@@ -19,9 +19,7 @@ window.onload = function() {
 function imageLoadingDoneSoStartGame() {
 	var framesPerSecond = 30;
 	setInterval(updateAll, 1000/framesPerSecond);
-
 	setupInput();
-
 	loadLevel();
 }
 
@@ -36,13 +34,12 @@ function updateAll() {
 }
 
 function moveAll() {
-	ship.move();
+	ship.move(UFO);
 	UFO.move();
-	ship.checkMyShipAndShotCollisionAgainst(UFO);
 }
 
 function drawAll() {
 	colorRect(0,0, canvas.width,canvas.height, "black");
-	UFO.draw();
 	ship.draw();
+	UFO.draw();
 }

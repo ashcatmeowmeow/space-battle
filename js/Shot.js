@@ -56,9 +56,7 @@ function shotClass() {
 	}
 
 	this.draw = function() {
-
 		if(this.shotLife > 0){
-			console.log("meow");
 			colorCircle(this.x,this.y, SHOT_DISPLAY_RADIUS, "white");
 		}
 	}
