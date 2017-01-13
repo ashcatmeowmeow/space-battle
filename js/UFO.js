@@ -1,6 +1,6 @@
 const UFO_SPEED = 1.9;
 const UFO_TIME_BETWEEN_CHANGE_DIR = 85;
-const UFO_COLLISION_RADIUS = 13;
+const UFO_COLLISION_RADIUS = 30;
 
 UFOClass.prototype = new movingWrapPositionClass();
 

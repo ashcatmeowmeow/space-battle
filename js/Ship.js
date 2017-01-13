@@ -50,7 +50,8 @@ function shipClass() {
   this.checkMyShipCollisonAgainst = function(thisEnemy) {
     if( thisEnemy.isOverlappingPoint(this.x,this.y) ) {
       this.reset();
-      document.getElementById("debugText").innerHTML = "Player Crashed!";
+      console.log('u d.e.d dead');
+			loadLevel();
     }
   }
 
@@ -82,9 +83,9 @@ function shipClass() {
         this.myShotArray[i].shootFrom(this);
       }
       if( this.myShotArray[i].hitTest(thisEnemy) ) {
-        thisEnemy.reset();
+        thisEnemy.reset(UFOPic);
         this.myShotArray[i].reset();
-        document.getElementById("debugText").innerHTML = "Enemy Blasted!";
+        console.log('UFO blasted');
       }
       if(this.myShotArray[i].shotLife > 0){
         this.myShotArray[i].move();
