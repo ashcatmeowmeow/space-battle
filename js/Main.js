@@ -2,6 +2,8 @@ var canvas, canvasContext;
 var ship;
 var UFO;
 
+var score = 0;
+
 window.onload = function() {
 	canvas = document.getElementById('gameCanvas');
 	canvasContext = canvas.getContext('2d');
@@ -35,11 +37,12 @@ function updateAll() {
 
 function moveAll() {
 	ship.move(UFO);
-	UFO.move();
+	//UFO.move();
 }
 
 function drawAll() {
 	colorRect(0,0, canvas.width,canvas.height, "black");
+	drawUI();
 	ship.draw();
 	UFO.draw();
 }

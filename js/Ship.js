@@ -85,6 +85,7 @@ function shipClass() {
       if( this.myShotArray[i].hitTest(thisEnemy) ) {
         thisEnemy.reset(UFOPic);
         this.myShotArray[i].reset();
+				score += 100;
         console.log('UFO blasted');
       }
       if(this.myShotArray[i].shotLife > 0){
