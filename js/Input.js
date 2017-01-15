@@ -4,6 +4,7 @@ const KEY_RIGHT_ARROW = 39;
 const KEY_DOWN_ARROW = 40;
 
 const KEY_SPACEBAR = 32;
+const KEY_ENTER = 13;
 
 const KEY_W = 87;
 const KEY_A = 65;
@@ -59,6 +60,11 @@ function keySet(keyEvent, setTo) {
 	}
 	if(keyEvent.keyCode	== ship.controlKeyForShotFire) {
 		ship.keyHeld_Fire = setTo;
+	}
+	if(keyEvent.keyCode	== KEY_ENTER) {
+		if(showingTitleScreen){
+			showingTitleScreen = false;
+		}
 	}
 }
 
