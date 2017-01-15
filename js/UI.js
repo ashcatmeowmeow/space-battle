@@ -1,4 +1,6 @@
 function drawUI(){
+	var scoreText = score.toString() + ' ' + scoreMultiplier.toString() + 'x';
+	console.log(scoreText);
 	canvasContext.font = "14px Arial";
-	colorText(score, canvas.width-50, 50, 'white');
+	colorText(scoreText, canvas.width-50, 50, 'white');
 }

@@ -21,5 +21,4 @@ function colorCircle(centerX,centerY, radius, fillColor) {
 function colorText(showWords, textX,textY, fillColor) {
 	canvasContext.fillStyle = fillColor;
 	canvasContext.fillText(showWords, textX, textY);
-	console.log('fuck me');
 }
