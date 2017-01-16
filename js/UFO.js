@@ -19,8 +19,10 @@ function UFOClass() {
 		this.superClassReset();
 		this.myUFOPic = whichImage;
 		this.speed = 0;
-		this.x = Math.random()*canvas.width;
-		this.y = Math.random()*canvas.height;
+		//this.x = Math.random()*canvas.width;
+		//this.y = Math.random()*canvas.height;
+		this.x = 300;
+		this.y = 300;
 		this.cyclesTilDirectionChange = 0;
 	} // end of UFOReset func
 

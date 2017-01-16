@@ -1,6 +1,11 @@
 var canvas, canvasContext;
+
 var ship;
 var UFO;
+
+var score = 0;
+
+var showingTitleScreen = true;
 
 window.onload = function() {
 	canvas = document.getElementById('gameCanvas');
@@ -34,12 +39,21 @@ function updateAll() {
 }
 
 function moveAll() {
+	if(showingTitleScreen){
+	 return;
+	}
 	ship.move(UFO);
-	UFO.move();
+	//UFO.move();
 }
 
 function drawAll() {
 	colorRect(0,0, canvas.width,canvas.height, "black");
-	ship.draw();
-	UFO.draw();
+	if(showingTitleScreen){
+		titleScreen();
+	}
+	else{
+		drawUI();
+		ship.draw();
+		UFO.draw();	
+	}
 }

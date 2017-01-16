@@ -3,6 +3,11 @@ const THRUST_POWER = 0.15;
 const TURN_RATE = 0.03;
 const NUMBER_OF_SHOTS = 5;
 
+const MULTIPLIER_LIFESPAN = 150;
+
+var scoreMultiplier = 0;
+var scoreMultiplierLifeSpan = MULTIPLIER_LIFESPAN;
+
 shipClass.prototype = new movingWrapPositionClass();
 
 function shipClass() {
@@ -58,6 +63,14 @@ function shipClass() {
 	this.superClassMove = this.move;
 	this.move = function(thisEnemy) {
 
+	if(scoreMultiplierLifeSpan > 0){
+		scoreMultiplierLifeSpan--;
+	}
+
+	if(scoreMultiplierLifeSpan == 0){
+		scoreMultiplier = 0;
+	}
+
 		if(this.keyHeld_Gas) {
 			this.xv += Math.cos(this.ang) * THRUST_POWER;
 			this.yv += Math.sin(this.ang) * THRUST_POWER;
@@ -83,8 +96,12 @@ function shipClass() {
         this.myShotArray[i].shootFrom(this);
       }
       if( this.myShotArray[i].hitTest(thisEnemy) ) {
+				scoreMultiplierLifeSpan = MULTIPLIER_LIFESPAN;
+				scoreMultiplier++;
         thisEnemy.reset(UFOPic);
         this.myShotArray[i].reset();
+				//TODO hook this variable up to some logic
+				score += 100 * scoreMultiplier;
         console.log('UFO blasted');
       }
       if(this.myShotArray[i].shotLife > 0){
