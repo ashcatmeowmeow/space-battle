@@ -13,6 +13,7 @@ window.onload = function() {
 
 	ship = new shipClass();
 	UFO = new UFOClass();
+	asteroid = new asteroidClass();
 
 	colorRect(0,0, canvas.width,canvas.height, 'black');
 	colorText("LOADING IMAGES", canvas.width/2, canvas.height/2, 'white');
@@ -31,6 +32,7 @@ function imageLoadingDoneSoStartGame() {
 function loadLevel(whichLevel) {
 	ship.reset(shipPic);
 	UFO.reset(UFOPic);
+	asteroid.reset(asteroidPic);
 }
 
 function updateAll() {
@@ -44,6 +46,7 @@ function moveAll() {
 	}
 	ship.move(UFO);
 	//UFO.move();
+	asteroid.move();
 }
 
 function drawAll() {
@@ -54,6 +57,7 @@ function drawAll() {
 	else{
 		drawUI();
 		ship.draw();
-		UFO.draw();	
+		UFO.draw();
+		asteroid.draw();
 	}
 }
