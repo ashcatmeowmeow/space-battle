@@ -60,8 +60,16 @@ function shipClass() {
     }
   }
 
+	this.checkMyShipCollisonAgainstAsteroid = function(thisAsteroid) {
+		if( thisAsteroid.isOverlappingPoint(this.x,this.y) ) {
+			this.reset();
+			console.log('u d.e.d dead');
+			loadLevel();
+		}
+	}
+
 	this.superClassMove = this.move;
-	this.move = function(thisEnemy) {
+	this.move = function(thisEnemy, thisAsteroid) {
 
 	if(scoreMultiplierLifeSpan > 0){
 		scoreMultiplierLifeSpan--;
@@ -87,6 +95,7 @@ function shipClass() {
 
 		this.superClassMove();
 		this.checkMyShipCollisonAgainst(thisEnemy);
+		this.checkMyShipCollisonAgainstAsteroid(thisAsteroid);
     this.iterateThroughShotArray(thisEnemy);
 	}
 
