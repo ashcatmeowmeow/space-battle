@@ -2,10 +2,9 @@ var canvas, canvasContext;
 
 var ship;
 var UFO;
-
 var score = 0;
-
 var showingTitleScreen = true;
+var objectsToCrashInto;
 
 window.onload = function() {
 	canvas = document.getElementById('gameCanvas');
@@ -13,6 +12,8 @@ window.onload = function() {
 
 	ship = new shipClass();
 	UFO = new UFOClass();
+	asteroid = new asteroidClass();
+	//objectsToCrashInto.push(UFO, asteroid);
 
 	colorRect(0,0, canvas.width,canvas.height, 'black');
 	colorText("LOADING IMAGES", canvas.width/2, canvas.height/2, 'white');
@@ -31,6 +32,7 @@ function imageLoadingDoneSoStartGame() {
 function loadLevel(whichLevel) {
 	ship.reset(shipPic);
 	UFO.reset(UFOPic);
+	asteroid.reset(asteroidPic);
 }
 
 function updateAll() {
@@ -42,8 +44,9 @@ function moveAll() {
 	if(showingTitleScreen){
 	 return;
 	}
-	ship.move(UFO);
+	ship.move(UFO, asteroid);
 	//UFO.move();
+	asteroid.move();
 }
 
 function drawAll() {
@@ -54,6 +57,7 @@ function drawAll() {
 	else{
 		drawUI();
 		ship.draw();
-		UFO.draw();	
+		UFO.draw();
+		asteroid.draw();
 	}
 }

@@ -1,12 +1,12 @@
 var shipPic = document.createElement("img");
 var UFOPic = document.createElement("img");
+var asteroidPic = document.createElement("img");
 var worldPics = [];
 
 var picsToLoad = 0; // set automatically based on imageList in loadImages()
 
 function countLoadedImagesAndLaunchIfReady() {
 	picsToLoad--;
-	console.log(picsToLoad);
 	if(picsToLoad == 0) {
 		imageLoadingDoneSoStartGame();
 	}
@@ -25,7 +25,8 @@ function loadImageForWorldCode(worldCode, fileName) {
 function loadImages() {
 	var imageList = [
 		{varName: shipPic, theFile: "player1.png"},
-		{varName: UFOPic, theFile: "ufo.png"}
+		{varName: UFOPic, theFile: "ufo.png"},
+		{varName: asteroidPic, theFile: "asteroid.png"}
 		];
 
 	picsToLoad = imageList.length;
