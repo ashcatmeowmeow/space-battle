@@ -51,25 +51,18 @@ function shipClass() {
 		this.y = canvas.height/2;
 	} // end of shipReset func
 
-
-  this.checkMyShipCollisonAgainst = function(thisEnemy) {
-    if( thisEnemy.isOverlappingPoint(this.x,this.y) ) {
-      this.reset();
-      console.log('u d.e.d dead');
-			loadLevel();
-    }
+  this.checkMyShipCollisonAgainst = function(colliders) {
+		for(var c = 0; c < colliders.length; c++){
+			if( colliders[c].isOverlappingPoint(this.x,this.y) ) {
+				this.reset();
+				console.log('u d.e.d dead');
+				loadLevel();
+			}
+		}
   }
 
-	this.checkMyShipCollisonAgainstAsteroid = function(thisAsteroid) {
-		if( thisAsteroid.isOverlappingPoint(this.x,this.y) ) {
-			this.reset();
-			console.log('u d.e.d dead');
-			loadLevel();
-		}
-	}
-
 	this.superClassMove = this.move;
-	this.move = function(thisEnemy, thisAsteroid) {
+	this.move = function(colliders) {
 
 	if(scoreMultiplierLifeSpan > 0){
 		scoreMultiplierLifeSpan--;
@@ -94,29 +87,30 @@ function shipClass() {
     this.yv *= SPACESPEED_DECAY_MULT;
 
 		this.superClassMove();
-		this.checkMyShipCollisonAgainst(thisEnemy);
-		this.checkMyShipCollisonAgainstAsteroid(thisAsteroid);
-    this.iterateThroughShotArray(thisEnemy);
+		this.checkMyShipCollisonAgainst(colliders);
+    this.iterateThroughShotArray(colliders);
 	}
 
-  this.iterateThroughShotArray = function(thisEnemy){
-    for(var i = 0; i< this.myShotArray.length; i++){
-      if(this.myShotArray[i].isShotReadyToFire()){
-        this.myShotArray[i].shootFrom(this);
-      }
-      if( this.myShotArray[i].hitTest(thisEnemy) ) {
-				scoreMultiplierLifeSpan = MULTIPLIER_LIFESPAN;
-				scoreMultiplier++;
-        thisEnemy.reset(UFOPic);
-        this.myShotArray[i].reset();
-				//TODO hook this variable up to some logic
-				score += 100 * scoreMultiplier;
-        console.log('UFO blasted');
-      }
-      if(this.myShotArray[i].shotLife > 0){
-        this.myShotArray[i].move();
-      }
-    }
+  this.iterateThroughShotArray = function(colliders){
+		for(var c = 0; c < colliders.length; c++){
+	    for(var i = 0; i < this.myShotArray.length; i++){
+	      if(this.myShotArray[i].isShotReadyToFire()){
+	        this.myShotArray[i].shootFrom(this);
+	      }
+	      if( this.myShotArray[i].hitTest(colliders[c]) ) {
+					scoreMultiplierLifeSpan = MULTIPLIER_LIFESPAN;
+					scoreMultiplier++;
+	        colliders[c].reset(UFOPic);
+	        this.myShotArray[i].reset();
+					//TODO hook this variable up to some logic
+					score += 100 * scoreMultiplier;
+	        console.log('UFO blasted');
+	      }
+	      if(this.myShotArray[i].shotLife > 0){
+	        this.myShotArray[i].move();
+	      }
+	    }
+		}
     for(var i = this.myShotArray.length-1; i >= 0; i--){
      if(this.myShotArray[i].shotLife < 1){
        this.myShotArray.splice(i,1);
