@@ -6,6 +6,7 @@ UFOClass.prototype = new movingWrapPositionClass();
 
 function UFOClass() {
 
+	this.type = 'ufo';
 	this.myShot	=	new	shotClass();
 	this.x = canvas.width/2;
 	this.y = canvas.height/2;

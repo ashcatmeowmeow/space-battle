@@ -88,35 +88,49 @@ function shipClass() {
 
 		this.superClassMove();
 		this.checkMyShipCollisonAgainst(colliders);
-    this.iterateThroughShotArray(colliders);
+    this.iterateThroughEnemyArray(colliders);
 	}
 
-  this.iterateThroughShotArray = function(colliders){
+	this.iterateThroughEnemyArray = function(colliders){
 		for(var c = 0; c < colliders.length; c++){
-	    for(var i = 0; i < this.myShotArray.length; i++){
-	      if(this.myShotArray[i].isShotReadyToFire()){
-	        this.myShotArray[i].shootFrom(this);
-	      }
-	      if( this.myShotArray[i].hitTest(colliders[c]) ) {
-					scoreMultiplierLifeSpan = MULTIPLIER_LIFESPAN;
-					scoreMultiplier++;
-	        colliders[c].reset(UFOPic);
-	        this.myShotArray[i].reset();
-					//TODO hook this variable up to some logic
-					score += 100 * scoreMultiplier;
-	        console.log('UFO blasted');
-	      }
-	      if(this.myShotArray[i].shotLife > 0){
-	        this.myShotArray[i].move();
-	      }
-	    }
+			this.iterateThroughShotArray(colliders, c);
+			this.removeDeadShots();
 		}
-    for(var i = this.myShotArray.length-1; i >= 0; i--){
-     if(this.myShotArray[i].shotLife < 1){
-       this.myShotArray.splice(i,1);
-     }
+	}
+
+  this.iterateThroughShotArray = function(colliders, currentCollider){
+    for(var i = 0; i < this.myShotArray.length; i++){
+      if(this.myShotArray[i].isShotReadyToFire()){
+        this.myShotArray[i].shootFrom(this);
+      }
+      if( this.myShotArray[i].hitTest(colliders[currentCollider]) ) {
+
+				scoreMultiplierLifeSpan = MULTIPLIER_LIFESPAN;
+				scoreMultiplier++;
+
+				if(colliders[currentCollider].type == 'ufo'){
+					colliders[currentCollider].reset(UFOPic);
+				}
+				if(colliders[currentCollider].type == 'asteroid'){
+					colliders[currentCollider].reset(asteroidPic);
+				}
+
+        this.myShotArray[i].reset();
+				score += 100 * scoreMultiplier;
+      }
+      if(this.myShotArray[i].shotLife > 0){
+        this.myShotArray[i].move();
+      }
     }
   }
+
+	this.removeDeadShots = function(){
+		for(var i = this.myShotArray.length-1; i >= 0; i--){
+		 if(this.myShotArray[i].shotLife < 1){
+			 this.myShotArray.splice(i,1);
+		 }
+		}
+	}
 
 	this.draw = function() {
     for(var i = 0; i< this.myShotArray.length; i++){
