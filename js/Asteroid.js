@@ -4,6 +4,8 @@ const ASTEROID_COLLISION_RADIUS = 50;
 asteroidClass.prototype = new movingWrapPositionClass();
 
 function asteroidClass() {
+
+	this.type = 'asteroid';
 	this.x = 100;
 	this.y = 100;
 	this.xv = 0;

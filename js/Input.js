@@ -74,7 +74,7 @@ function keyPressed(evt) {
 	keySet(evt, true);
 	if (!repeat) {
 		if(evt.keyCode	== ship.controlKeyForShotFire) {
-		ship.cannonFire(UFO);
+		ship.cannon.cannonFire();
 		}
 		repeat = true;
 	}
