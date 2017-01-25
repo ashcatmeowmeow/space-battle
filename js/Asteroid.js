@@ -19,8 +19,8 @@ function asteroidClass() {
 		this.speed = 0;
 		//this.x = Math.random()*canvas.width;
 		//this.y = Math.random()*canvas.height;
-		this.x = 300;
-		this.y = 300;
+		this.x = 300*Math.random();
+		this.y = 300*Math.random();
 		this.cyclesTilDirectionChange = 0;
 	} // end of asteroidReset func
 

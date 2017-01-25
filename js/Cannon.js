@@ -28,11 +28,9 @@ function cannonClass(){
         scoreMultiplierLifeSpan = MULTIPLIER_LIFESPAN;
         scoreMultiplier++;
 
-        if(colliders[currentCollider].type == 'ufo'){
-          colliders[currentCollider].reset(UFOPic);
-        }
         if(colliders[currentCollider].type == 'asteroid'){
-          colliders[currentCollider].reset(asteroidPic);
+          //colliders[currentCollider].reset(asteroidPic);
+          colliders.splice(currentCollider, 1)
         }
 
         this.shotArray[i].reset();
