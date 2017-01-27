@@ -1,5 +1,32 @@
 const ASTEROID_SPEED = 0.01;
 const ASTEROID_COLLISION_RADIUS = 50;
+const START_NUMBER_OF_ASTEROIDS = 3;
+
+function spawnAsteroids(){
+	for(var i = 0; i <= START_NUMBER_OF_ASTEROIDS; i++){
+		colliders.push(new asteroidClass());
+	}
+}
+
+function resetAsteroids(){
+	for(var i = 0; i < colliders.length; i++){
+		colliders[i].reset(asteroidPic);
+		//console.log(i);
+		//console.log(colliders[i]);
+	}
+}
+
+function moveAsteroids(){
+	for(var i = 0; i < colliders.length; i++){
+		colliders[i].move();
+	}
+}
+
+function drawAsteroids(){
+	for(var i = 0; i < colliders.length; i++){
+		colliders[i].draw();
+	}
+}
 
 asteroidClass.prototype = new movingWrapPositionClass();
 
@@ -29,6 +56,13 @@ function asteroidClass() {
 		var deltaY = testY-this.y;
 		var dist = Math.sqrt( (deltaX*deltaX) + (deltaY*deltaY) );
 		return (dist <= ASTEROID_COLLISION_RADIUS);
+	}
+
+	this.shootFrom = function(asteroidDestroyed){
+		this.x = asteroidDestroyed.x;
+		this.y = asteroidDestroyed.y;
+		this.xv = 0;
+		this.yv = 0;
 	}
 
 	this.superClassMove	=	this.move; //saving reference to parent class' move.

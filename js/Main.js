@@ -11,14 +11,9 @@ window.onload = function() {
 	canvasContext = canvas.getContext('2d');
 
 	ship = new shipClass();
-	//UFO = new UFOClass();
-	asteroid = new asteroidClass();
-	asteroid2 = new asteroidClass();
-	colliders.push(asteroid, asteroid2);
-
+	spawnAsteroids();
 	colorRect(0,0, canvas.width,canvas.height, 'black');
 	colorText("LOADING IMAGES", canvas.width/2, canvas.height/2, 'white');
-
 	loadImages();
 }
 
@@ -32,9 +27,7 @@ function imageLoadingDoneSoStartGame() {
 
 function loadLevel(whichLevel) {
 	ship.reset(shipPic);
-	//UFO.reset(UFOPic);
-	asteroid.reset(asteroidPic);
-	asteroid2.reset(asteroidPic);
+	resetAsteroids();
 }
 
 function updateAll() {
@@ -47,9 +40,7 @@ function moveAll() {
 	 return;
 	}
 	ship.move(colliders);
-	//UFO.move();
-	asteroid.move();
-	asteroid2.move();
+ 	moveAsteroids();
 }
 
 function drawAll() {
@@ -60,8 +51,6 @@ function drawAll() {
 	else{
 		drawUI();
 		ship.draw();
-		//UFO.draw();
-		asteroid.draw();
-		asteroid2.draw();
+		drawAsteroids();
 	}
 }
