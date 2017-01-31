@@ -31,9 +31,12 @@ function cannonClass(){
         if(colliders[currentCollider].type == 'asteroid'){
           //colliders[currentCollider].reset(asteroidPic);
           var tempAsteroid = new asteroidClass();
+          var tempAsteroid2 = new asteroidClass();
           tempAsteroid.reset(asteroidPic2);
           tempAsteroid.shootFrom(colliders[currentCollider]);
-          colliders.push(tempAsteroid);
+          tempAsteroid2.reset(asteroidPic2);
+          tempAsteroid2.shootFrom(colliders[currentCollider]);
+          colliders.push(tempAsteroid, tempAsteroid2);
           colliders.splice(currentCollider, 1);
         }
 

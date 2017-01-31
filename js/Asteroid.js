@@ -2,6 +2,8 @@ const ASTEROID_SPEED = 0.01;
 const ASTEROID_COLLISION_RADIUS = 50;
 const START_NUMBER_OF_ASTEROIDS = 3;
 
+const ASTEROID_CHILD_SPEED = 1.0;
+
 function spawnAsteroids(){
 	for(var i = 0; i <= START_NUMBER_OF_ASTEROIDS; i++){
 		colliders.push(new asteroidClass());
@@ -63,6 +65,11 @@ function asteroidClass() {
 		this.y = asteroidDestroyed.y;
 		this.xv = 0;
 		this.yv = 0;
+		//TODO you can maybe have the child asteroids fire out in a random direction based on the rock's ang variable.
+		this.xv = Math.cos(asteroidDestroyed.ang) * ASTEROID_CHILD_SPEED + asteroidDestroyed.xv;
+		this.yv = Math.sin(asteroidDestroyed.ang) * ASTEROID_CHILD_SPEED + asteroidDestroyed.yv;
+		//this.xv = ASTEROID_CHILD_SPEED + asteroidDestroyed.xv;
+		//this.yv = ASTEROID_CHILD_SPEED + asteroidDestroyed.yv;
 	}
 
 	this.superClassMove	=	this.move; //saving reference to parent class' move.
