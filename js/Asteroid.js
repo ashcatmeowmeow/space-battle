@@ -67,10 +67,9 @@ function asteroidClass(size) {
 		this.superClassReset();
 		this.myAsteroidPic = whichImage;
 		this.speed = 0;
-		//this.x = Math.random()*canvas.width;
-		//this.y = Math.random()*canvas.height;
-		this.x = Math.floor(Math.random() * 800) + 1
-		this.y = Math.floor(Math.random() * 600) + 1
+		//the formula to spawn an asteroid between x and 1
+		this.x = Math.floor(Math.random() * 1200) + 601;
+		this.y = Math.floor(Math.random() * 1200) + 601;
 		this.cyclesTilDirectionChange = 0;
 	} // end of asteroidReset func
 
