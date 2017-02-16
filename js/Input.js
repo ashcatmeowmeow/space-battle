@@ -11,6 +11,14 @@ const KEY_A = 65;
 const KEY_S = 83;
 const KEY_D = 68;
 
+const KEY_1 = 49;
+const KEY_2 = 50;
+const KEY_3 = 51;
+
+var peaShooterActive = true;
+var railGunActive = false;
+var shotSnakeActive = false;
+
 var mouseX = 0;
 var mouseY = 0;
 var repeat;
@@ -65,6 +73,23 @@ function keySet(keyEvent, setTo) {
 		if(showingTitleScreen){
 			showingTitleScreen = false;
 		}
+	}
+	if(keyEvent.keyCode == KEY_1){
+		peaShooterActive = true;
+		railGunActive = false;
+		shotSnakeActive = false;
+		console.log(railGunActive);
+	}
+	if(keyEvent.keyCode == KEY_2){
+		peaShooterActive = false;
+		railGunActive = true;
+		shotSnakeActive = false;
+		console.log(railGunActive);
+	}
+	if(keyEvent.keyCode == KEY_3){
+		peaShooterActive = false;
+		railGunActive = false;
+		shotSnakeActive = true;
 	}
 }
 

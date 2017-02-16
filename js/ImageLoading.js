@@ -2,6 +2,7 @@ var shipPic = document.createElement("img");
 var UFOPic = document.createElement("img");
 var asteroidPic = document.createElement("img");
 var asteroidPic2 = document.createElement("img");
+var explosionPic = document.createElement("img");
 var worldPics = [];
 
 var picsToLoad = 0; // set automatically based on imageList in loadImages()
@@ -28,7 +29,8 @@ function loadImages() {
 		{varName: shipPic, theFile: "player1.png"},
 		{varName: UFOPic, theFile: "ufo.png"},
 		{varName: asteroidPic, theFile: "asteroid.png"},
-		{varName: asteroidPic2, theFile: "asteroid-2.png"}
+		{varName: asteroidPic2, theFile: "asteroid-2.png"},
+		{varName: explosionPic, theFile: "explosion.png"},
 		];
 
 	picsToLoad = imageList.length;

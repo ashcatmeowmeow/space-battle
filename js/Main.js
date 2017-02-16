@@ -5,6 +5,7 @@ var UFO;
 var score = 0;
 var showingTitleScreen = true;
 var colliders = [];
+var explosions = [];
 
 window.onload = function() {
 	canvas = document.getElementById('gameCanvas');
@@ -52,5 +53,6 @@ function drawAll() {
 		drawUI();
 		ship.draw();
 		drawAsteroids();
+		drawExplosions();
 	}
 }
