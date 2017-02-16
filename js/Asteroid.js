@@ -93,6 +93,7 @@ function asteroidClass(size) {
 		//this.yv = ASTEROID_CHILD_SPEED + asteroidDestroyed.yv;
 	}
 
+	/*
 	this.superClassWrap = this.handleScreenWrap //saving reference to parent class' wrap class.
 	this.handleScreenWrap = function(){
 		var withinBoundaries;
@@ -100,6 +101,7 @@ function asteroidClass(size) {
 			this.superClassWrap();
 		} //check to see if the asteroid is within the boundaries of the canvas
 	}
+	*/
 
 	this.superClassMove	=	this.move; //saving reference to parent class' move.
 	this.move = function() {
