@@ -88,7 +88,8 @@ function shipClass() {
 
 		this.superClassMove();
 		this.checkMyShipCollisonAgainst(colliders);
-    this.cannon.iterateThroughEnemyArray(colliders, this);
+    //this.cannon.iterateThroughEnemyArray(colliders, this);
+		this.cannon.iterateShotsandColliders(colliders, this);
 	}
 
 	this.draw = function() {
