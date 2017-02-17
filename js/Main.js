@@ -12,7 +12,8 @@ window.onload = function() {
 	canvasContext = canvas.getContext('2d');
 
 	ship = new shipClass();
-	spawnAsteroids();
+	//spawnAsteroids();
+	spawnAndResetAsteroids();
 	colorRect(0,0, canvas.width,canvas.height, 'black');
 	colorText("LOADING IMAGES", canvas.width/2, canvas.height/2, 'white');
 	loadImages();
@@ -28,7 +29,7 @@ function imageLoadingDoneSoStartGame() {
 
 function loadLevel(whichLevel) {
 	ship.reset(shipPic);
-	resetAsteroids();
+	//resetAsteroids();
 }
 
 function updateAll() {
