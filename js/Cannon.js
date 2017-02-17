@@ -21,9 +21,9 @@ function cannonClass(){
   }
 
   this.iterateThroughShotArray = function(colliders, ship){
-    if(colliders.length == 0){
-      spawnAsteroids();
-      resetAsteroids();
+    if(colliders.length < (NUMBER_OF_ASTEROID_FRAGMENTS/2)){
+      //spawnAsteroids();
+      //resetAsteroids();
     }
     for(var i = 0; i < this.shotArray.length; i++){
       if(this.shotArray[i].isShotReadyToFire()){

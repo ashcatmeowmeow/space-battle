@@ -2,7 +2,7 @@ const ASTEROID_SPEED = 0.01;
 const ASTEROID_COLLISION_RADIUS = 50;
 const START_NUMBER_OF_ASTEROIDS = 3;
 
-const NUMBER_OF_ASTEROID_FRAGMENTS = 3;
+const NUMBER_OF_ASTEROID_FRAGMENTS = 10;
 const ASTEROID_CHILD_SPEED = 1.5;
 
 function destroyAsteroid(colliders, currentAsteroid, currentAsteroidOffset){
