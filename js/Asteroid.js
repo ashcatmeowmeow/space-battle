@@ -1,6 +1,6 @@
 const ASTEROID_SPEED = 0.01;
 const ASTEROID_COLLISION_RADIUS = 50;
-const START_NUMBER_OF_ASTEROIDS = 3;
+const START_NUMBER_OF_ASTEROIDS = 5;
 
 const NUMBER_OF_ASTEROID_FRAGMENTS = 10;
 const ASTEROID_CHILD_SPEED = 1.5;
@@ -22,12 +22,29 @@ function destroyAsteroid(colliders, currentAsteroid, currentAsteroidOffset){
 	}
 }
 
+/*
 function spawnAsteroids(){
+	var tempAsteroidWave = [];
 	for(var i = 0; i <= START_NUMBER_OF_ASTEROIDS; i++){
 		colliders.push(new asteroidClass('big'));
 	}
+	//TODO maybe move reset Asteroids into here
+}
+*/
+
+function spawnAndResetAsteroids(){
+	var tempAsteroidWave = [];
+	for(var i = 0; i <= START_NUMBER_OF_ASTEROIDS; i++){
+		var tempAsteroid = new asteroidClass('big');
+		colliders.push(tempAsteroid);
+		tempAsteroidWave.push(tempAsteroid);
+	}
+	for(var i = 0; i < tempAsteroidWave.length; i++){
+		tempAsteroidWave[i].reset(asteroidPic);
+	}
 }
 
+/*
 function resetAsteroids(){
 	for(var i = 0; i < colliders.length; i++){
 		colliders[i].reset(asteroidPic);
@@ -35,6 +52,7 @@ function resetAsteroids(){
 		//console.log(colliders[i]);
 	}
 }
+*/
 
 function moveAsteroids(){
 	for(var i = 0; i < colliders.length; i++){
@@ -68,9 +86,24 @@ function asteroidClass(size) {
 		this.myAsteroidPic = whichImage;
 		this.speed = 0;
 		//the formula to spawn an asteroid between x and 1
-		this.x = Math.floor(Math.random() * 1200) + 601;
-		this.y = Math.floor(Math.random() * 1200) + 601;
-		this.cyclesTilDirectionChange = 0;
+		//SPAWN RANDOMLY ON THE TOP SIDE
+		this.randomSide = Math.floor(Math.random() * 4) + 1;
+		if(this.randomSide == 1){
+			this.x = -100;
+			this.y = Math.floor(Math.random() * 600) + 1;
+		}
+		if(this.randomSide == 2){
+			this.x = Math.floor(Math.random() * 600) + 1;
+			this.y = -100;
+		}
+		if(this.randomSide == 3){
+			this.x = Math.floor(Math.random() * 600) + 1;
+			this.y = 700;
+		}
+		if(this.randomSide == 4){
+			this.x = 700;
+			this.y = Math.floor(Math.random() * 600) + 1;
+		}
 	} // end of asteroidReset func
 
 	this.isOverlappingPoint = function(testX, testY){
@@ -91,16 +124,6 @@ function asteroidClass(size) {
 		//this.xv = ASTEROID_CHILD_SPEED + asteroidDestroyed.xv;
 		//this.yv = ASTEROID_CHILD_SPEED + asteroidDestroyed.yv;
 	}
-
-	/*
-	this.superClassWrap = this.handleScreenWrap //saving reference to parent class' wrap class.
-	this.handleScreenWrap = function(){
-		var withinBoundaries;
-		if(this.x > 0 && this.x < canvas.width && this.y > 0 && this.y < canvas.height) {
-			this.superClassWrap();
-		} //check to see if the asteroid is within the boundaries of the canvas
-	}
-	*/
 
 	this.superClassMove	=	this.move; //saving reference to parent class' move.
 	this.move = function() {
