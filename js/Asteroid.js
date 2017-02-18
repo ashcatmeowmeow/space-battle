@@ -7,7 +7,6 @@ const ASTEROID_CHILD_SPEED = 1.5;
 
 function destroyAsteroid(colliders, currentAsteroid, currentAsteroidOffset){
 	if(currentAsteroid.size == 'big'){
-		/*
 		colliders.splice(currentAsteroidOffset, 1);
 		for(var i = 0; i < NUMBER_OF_ASTEROID_FRAGMENTS; i++){
 			var tempAsteroid = new asteroidClass('small');
@@ -15,7 +14,6 @@ function destroyAsteroid(colliders, currentAsteroid, currentAsteroidOffset){
 			tempAsteroid.shootFrom(currentAsteroid);
 			colliders.push(tempAsteroid);
 		}
-		*/
 		colliders.splice(currentAsteroidOffset, 1);
 	} else {
 		colliders.splice(currentAsteroidOffset, 1);
