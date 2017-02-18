@@ -4,16 +4,14 @@ var ship;
 var UFO;
 var score = 0;
 var showingTitleScreen = true;
+var showingGameOverScreen = false;
 var colliders = [];
 var explosions = [];
 
 window.onload = function() {
 	canvas = document.getElementById('gameCanvas');
 	canvasContext = canvas.getContext('2d');
-
 	ship = new shipClass();
-	//spawnAsteroids();
-	spawnAndResetAsteroids();
 	colorRect(0,0, canvas.width,canvas.height, 'black');
 	colorText("LOADING IMAGES", canvas.width/2, canvas.height/2, 'white');
 	loadImages();
@@ -29,7 +27,7 @@ function imageLoadingDoneSoStartGame() {
 
 function loadLevel(whichLevel) {
 	ship.reset(shipPic);
-	//resetAsteroids();
+	spawnAndResetAsteroids();
 }
 
 function updateAll() {
@@ -38,9 +36,11 @@ function updateAll() {
 }
 
 function moveAll() {
-	if(showingTitleScreen){
+	if(showingGameOverScreen){
 	 return;
-	}
+ } else if(showingTitleScreen){
+	 return
+ }
 	ship.move(colliders);
  	moveAsteroids();
 }
@@ -49,6 +49,8 @@ function drawAll() {
 	colorRect(0,0, canvas.width,canvas.height, "black");
 	if(showingTitleScreen){
 		titleScreen();
+	} else if(showingGameOverScreen){
+		gameOverScreen();
 	}
 	else{
 		drawUI();

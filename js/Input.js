@@ -15,8 +15,8 @@ const KEY_1 = 49;
 const KEY_2 = 50;
 const KEY_3 = 51;
 
-var peaShooterActive = true;
-var railGunActive = false;
+var peaShooterActive = false;
+var railGunActive = true;
 var shotSnakeActive = false;
 
 var mouseX = 0;
@@ -72,6 +72,9 @@ function keySet(keyEvent, setTo) {
 	if(keyEvent.keyCode	== KEY_ENTER) {
 		if(showingTitleScreen){
 			showingTitleScreen = false;
+		}
+		if(showingGameOverScreen){
+			showingGameOverScreen = false;
 		}
 	}
 	if(keyEvent.keyCode == KEY_1){

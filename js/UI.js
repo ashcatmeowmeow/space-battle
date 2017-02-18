@@ -17,3 +17,17 @@ function titleScreen(){
 	canvasContext.font = "20px Arial";
 	canvasContext.fillText((titleText), canvas.width/2, 250);
 }
+
+function gameOverScreen(){
+	var titleText = "game over"
+	var subText = "you're gonna carry that weight"
+	var subSubText = "press enter to reset"
+	canvasContext.fillStyle = "white";
+	canvasContext.textAlign="center";
+	canvasContext.font = "14px Arial";
+	canvasContext.fillText((subText), canvas.width/2, 270);
+	canvasContext.font = "14px Arial";
+	canvasContext.fillText((subSubText), canvas.width/2, 300);
+	canvasContext.font = "20px Arial";
+	canvasContext.fillText((titleText), canvas.width/2, 250);
+}

@@ -22,6 +22,12 @@ function destroyAsteroid(colliders, currentAsteroid, currentAsteroidOffset){
 	}
 }
 
+function clearAllAsteroids(colliders){
+	for(var i = 0; i < colliders.length; i++){
+		colliders.splice(colliders[i], 1);
+	}
+}
+
 /*
 function spawnAsteroids(){
 	var tempAsteroidWave = [];

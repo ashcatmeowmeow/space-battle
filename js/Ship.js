@@ -53,9 +53,9 @@ function shipClass() {
   this.checkMyShipCollisonAgainst = function(colliders) {
 		for(var c = 0; c < colliders.length; c++){
 			if( colliders[c].isOverlappingPoint(this.x,this.y) ) {
-				this.reset();
-				console.log('u d.e.d dead');
+				clearAllAsteroids(colliders);
 				loadLevel();
+				showingGameOverScreen = true;
 			}
 		}
   }
