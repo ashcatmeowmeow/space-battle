@@ -15,6 +15,7 @@ function railSlugClass() {
 	this.deltaY = 0;
 
 	this.shotLife = 30;
+	this.timeUntilCanHitAgain = 0;
 
 	this.superClassReset = this.reset;
 	this.reset = function() {
@@ -25,6 +26,13 @@ function railSlugClass() {
 	this.isShotReadyToFire = function(){
 		if(this.shotLife <= 0){
 			return true;
+		}
+	}
+
+	this.countdownTimeUntilCanHitAgain = function(){
+		if(this.timeUntilCanHitAgain > 0 ){
+			this.timeUntilCanHitAgain--;
+			console.log(this.timeUntilCanHitAgain);
 		}
 	}
 
@@ -64,10 +72,16 @@ function railSlugClass() {
 			this.shotLife--;
 			this.superClassMove();
 		}
+		if(this.x > canvas.width){
+			console.log('buhbuhBONUS');
+		}
 	}
 
 	this.hitTest = function(thisEnemy) {
 		if(this.shotLife <= 0){
+			return false;
+		}
+		if(this.timeUntilCanHitAgain != 0){
 			return false;
 		}
 		return thisEnemy.isOverlappingPoint(this.x, this.y);

@@ -41,14 +41,8 @@ function cannonClass(){
 
           colliders[currentCollider].hp -= this.shotArray[i].attackValue;
           if(colliders[currentCollider].hp < 0){
+            this.shotArray[i].countdownTimeUntilCanHitAgain();
             destroyAsteroid(colliders, colliders[currentCollider], currentCollider);
-            //THE EXPLOSION DOES THE KILLING, i think NOT THE RAIL ITSELF
-            /*
-            var tempExplosion = new explosionClass();
-            tempExplosion.reset(explosionPic);
-            explosions.push(tempExplosion);
-            tempExplosion.explodeAtPoint(colliders[currentCollider]);
-            */
           }
 
           if(colliders[currentCollider].size == 'big'){
