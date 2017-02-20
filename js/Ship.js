@@ -51,6 +51,13 @@ function shipClass() {
 		this.y = canvas.height/2;
 	} // end of shipReset func
 
+	this.isOverlappingPoint = function(testX, testY){
+		var deltaX = testX-this.x;
+		var deltaY = testY-this.y;
+		var dist = Math.sqrt( (deltaX*deltaX) + (deltaY*deltaY) );
+		return (dist <= 30);
+	}
+
   this.checkMyShipCollisonAgainst = function(colliders) {
 		for(var c = 0; c < colliders.length; c++){
 			if( colliders[c].isOverlappingPoint(this.x,this.y) ) {
