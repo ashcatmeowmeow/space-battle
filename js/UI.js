@@ -7,7 +7,7 @@ function drawUI(){
 function titleScreen(){
 	var titleText = "asteroids clone!"
 	var subText = "up to increase speed, left and right to turn"
-	var subSubText = "press enter to start"
+	var subSubText = "space to fire, enter to start"
 	canvasContext.fillStyle = "white";
 	canvasContext.textAlign="center";
 	canvasContext.font = "14px Arial";
@@ -20,7 +20,7 @@ function titleScreen(){
 
 function gameOverScreen(){
 	var titleText = "game over"
-	var subText = "you're gonna carry that weight"
+	var subText = "score: " + endScore;
 	var subSubText = "press enter to reset"
 	canvasContext.fillStyle = "white";
 	canvasContext.textAlign="center";

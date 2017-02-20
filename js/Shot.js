@@ -11,8 +11,6 @@ function shotClass() {
 	this.xv = 0;
 	this.yv = 0;
 
-	this.shotLife = 30
-
 	this.superClassReset = this.reset;
 	this.reset = function() {
 		this.superClassReset();

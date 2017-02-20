@@ -4,6 +4,7 @@ const TURN_RATE = 0.03;
 
 const MULTIPLIER_LIFESPAN = 150;
 
+var endScore;
 var scoreMultiplier = 0;
 var scoreMultiplierLifeSpan = MULTIPLIER_LIFESPAN;
 
@@ -53,14 +54,10 @@ function shipClass() {
   this.checkMyShipCollisonAgainst = function(colliders) {
 		for(var c = 0; c < colliders.length; c++){
 			if( colliders[c].isOverlappingPoint(this.x,this.y) ) {
-				clearAllAsteroids(colliders);
-				loadLevel();
-				showingGameOverScreen = true;
+				resetGame();
 			}
 		}
   }
-
-	this.cannon.cannonFire();
 
 	this.superClassMove = this.move;
 	this.move = function(colliders) {

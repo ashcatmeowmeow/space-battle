@@ -25,9 +25,19 @@ function imageLoadingDoneSoStartGame() {
 	loadLevel();
 }
 
+function resetGame(){
+	endScore = score;
+	score = 0;
+	scoreMultiplier = 0;
+	clearAllAsteroids(colliders);
+	loadLevel();
+	showingGameOverScreen = true;
+}
+
+
 function loadLevel(whichLevel) {
 	ship.reset(shipPic);
-	spawnAndResetAsteroids();
+	//spawnAndResetAsteroids();
 }
 
 function updateAll() {
@@ -56,6 +66,6 @@ function drawAll() {
 		drawUI();
 		ship.draw();
 		drawAsteroids();
-		drawExplosions();
+		//drawExplosions();
 	}
 }

@@ -21,20 +21,12 @@ function destroyAsteroid(colliders, currentAsteroid, currentAsteroidOffset){
 }
 
 function clearAllAsteroids(colliders){
-	for(var i = 0; i < colliders.length; i++){
+	console.log(colliders.length);
+	for(var i = colliders.length-1; i >= 0; i--){
+		console.log(i);
 		colliders.splice(colliders[i], 1);
 	}
 }
-
-/*
-function spawnAsteroids(){
-	var tempAsteroidWave = [];
-	for(var i = 0; i <= START_NUMBER_OF_ASTEROIDS; i++){
-		colliders.push(new asteroidClass('big'));
-	}
-	//TODO maybe move reset Asteroids into here
-}
-*/
 
 function spawnAndResetAsteroids(){
 	var tempAsteroidWave = [];
@@ -47,16 +39,6 @@ function spawnAndResetAsteroids(){
 		tempAsteroidWave[i].reset(asteroidPic);
 	}
 }
-
-/*
-function resetAsteroids(){
-	for(var i = 0; i < colliders.length; i++){
-		colliders[i].reset(asteroidPic);
-		//console.log(i);
-		//console.log(colliders[i]);
-	}
-}
-*/
 
 function moveAsteroids(){
 	for(var i = 0; i < colliders.length; i++){

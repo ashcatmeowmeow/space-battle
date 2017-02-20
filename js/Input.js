@@ -77,23 +77,6 @@ function keySet(keyEvent, setTo) {
 			showingGameOverScreen = false;
 		}
 	}
-	if(keyEvent.keyCode == KEY_1){
-		peaShooterActive = true;
-		railGunActive = false;
-		shotSnakeActive = false;
-		console.log(railGunActive);
-	}
-	if(keyEvent.keyCode == KEY_2){
-		peaShooterActive = false;
-		railGunActive = true;
-		shotSnakeActive = false;
-		console.log(railGunActive);
-	}
-	if(keyEvent.keyCode == KEY_3){
-		peaShooterActive = false;
-		railGunActive = false;
-		shotSnakeActive = true;
-	}
 }
 
 
@@ -102,7 +85,7 @@ function keyPressed(evt) {
 	keySet(evt, true);
 	if (!repeat) {
 		if(evt.keyCode	== ship.controlKeyForShotFire) {
-		ship.cannon.cannonFire();
+			ship.cannon.cannonFire();
 		}
 		repeat = true;
 	}
