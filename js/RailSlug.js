@@ -58,7 +58,8 @@ function railSlugClass() {
 
 	this.draw = function() {
 		if(this.shotLife > 0){
-			colorCircle(this.x,this.y, RAIL_DISPLAY_RADIUS, "red");
+			//colorCircle(this.x,this.y, RAIL_DISPLAY_RADIUS, "red");
+			colorRect(this.x,this.y,40,3,"red", ship.ang);
 		}
 	}
 }
