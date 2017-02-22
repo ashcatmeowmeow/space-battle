@@ -3,12 +3,10 @@ const NUMBER_OF_SHOTS = 1;
 function cannonClass(){
   this.shotArray = [];
 
-  this.cannonFire = function(){
+  this.cannonFire = function(ship){
     if(this.shotArray.length < NUMBER_OF_SHOTS) {
-      if(peaShooterActive)
-        var tempShot = new shotClass();
       if(railGunActive){
-        var tempShot = new railSlugClass();
+        var tempShot = new railSlugClass(ship);
       }
       this.shotArray.push(tempShot);
       tempShot.reset();
