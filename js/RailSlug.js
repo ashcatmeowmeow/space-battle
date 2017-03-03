@@ -38,8 +38,9 @@ function railSlugClass() {
 
 	this.shootFrom = function(shipFiring){
 
-		this.x = shipFiring.x;
-		this.y = shipFiring.y;
+		var shotDistFromShipCenter = SHIP_COLLISION_RADIUS + 2;
+		this.x = shipFiring.x + Math.cos(shipFiring.ang) * shotDistFromShipCenter;
+		this.y = shipFiring.y + Math.sin(shipFiring.ang) * shotDistFromShipCenter;
 
 		/*
 		this.deltaX = SHOT_OFFSET - shipFiring.x;

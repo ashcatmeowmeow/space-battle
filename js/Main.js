@@ -51,6 +51,7 @@ function moveAll() {
  } else if(showingTitleScreen){
 	 return
  }
+ 	sweepAsteroidsReadyForRemoval();
 	ship.move(colliders);
  	moveAsteroids();
 }

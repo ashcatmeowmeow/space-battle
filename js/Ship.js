@@ -1,6 +1,7 @@
 const SPACESPEED_DECAY_MULT = 0.99;
 const THRUST_POWER = 0.15;
 const TURN_RATE = 0.03;
+const SHIP_COLLISION_RADIUS = 30;
 
 const MULTIPLIER_LIFESPAN = 150;
 
@@ -55,7 +56,7 @@ function shipClass() {
 		var deltaX = testX-this.x;
 		var deltaY = testY-this.y;
 		var dist = Math.sqrt( (deltaX*deltaX) + (deltaY*deltaY) );
-		return (dist <= 30);
+		return (dist <= SHIP_COLLISION_RADIUS);
 	}
 
   this.checkMyShipCollisonAgainst = function(colliders) {
