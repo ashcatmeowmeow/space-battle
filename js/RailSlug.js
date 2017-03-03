@@ -17,6 +17,8 @@ function railSlugClass() {
 	this.shotLife = 30;
 	this.timeUntilCanHitAgain = 0;
 
+	this.shotAng;
+
 	this.superClassReset = this.reset;
 	this.reset = function() {
 		this.superClassReset();
@@ -33,7 +35,6 @@ function railSlugClass() {
 		if(this.timeUntilCanHitAgain > 0 ){
 			this.timeUntilCanHitAgain--;
 			console.log(this.timeUntilCanHitAgain);
-		}
 	}
 
 	this.shootFrom = function(shipFiring){
