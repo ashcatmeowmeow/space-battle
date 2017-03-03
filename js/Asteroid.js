@@ -5,6 +5,8 @@ const START_NUMBER_OF_ASTEROIDS = 5;
 const NUMBER_OF_ASTEROID_FRAGMENTS = 10;
 const ASTEROID_CHILD_SPEED = 1.5;
 
+const INVINCIBILITY_TIMER = 4;
+
 function destroyAsteroid(colliders, currentAsteroid, currentAsteroidOffset){
 	if(currentAsteroid.size == 'big'){
 		colliders.splice(currentAsteroidOffset, 1);
@@ -14,12 +16,19 @@ function destroyAsteroid(colliders, currentAsteroid, currentAsteroidOffset){
 			tempAsteroid.shootFrom(currentAsteroid);
 			colliders.push(tempAsteroid);
 		}
-		colliders.splice(currentAsteroidOffset, 1);
+		currentAsteroid.isReadyToRemove = true;
 	} else {
-		colliders.splice(currentAsteroidOffset, 1);
+		currentAsteroid.isReadyToRemove = true;
 	}
 }
 
+function sweepAsteroidsReadyForRemoval(){
+	for(var i = colliders.length-1; i >= 0; i--){
+		if(colliders[i].isReadyToRemove){
+			colliders.splice(i, 1);
+		}
+	}
+}
 function clearAllAsteroids(colliders){
 	console.log(colliders.length);
 	for(var i = colliders.length-1; i >= 0; i--){
@@ -55,7 +64,6 @@ function drawAsteroids(){
 asteroidClass.prototype = new movingWrapPositionClass();
 
 function asteroidClass(size) {
-
 	this.type = 'asteroid';
 	this.size = size;
 	this.x = 100;
@@ -65,6 +73,9 @@ function asteroidClass(size) {
 	this.ang = Math.random() * Math.PI;
 
 	this.hp = 3;
+
+	this.isReadyToRemove = false;
+	this.invicibilityTimer = INVINCIBILITY_TIMER;
 
 	this.superClassReset = this.reset;
 	this.reset = function(whichImage) {
@@ -100,8 +111,10 @@ function asteroidClass(size) {
 	}
 
 	this.shootFrom = function(asteroidDestroyed){
-		this.x = asteroidDestroyed.x;
-		this.y = asteroidDestroyed.y;
+		var distFromCenter = 20 + Math.random() * 30;
+		var randAng = Math.PI * 2.0 * Math.random();
+		this.x = asteroidDestroyed.x + distFromCenter * Math.cos(randAng);
+		this.y = asteroidDestroyed.y + distFromCenter * Math.sin(randAng);
 		this.xv = 0;
 		this.yv = 0;
 		//TODO you can maybe have the child asteroids fire out in a random direction based on the rock's ang variable.
@@ -117,6 +130,9 @@ function asteroidClass(size) {
 		this.yv += Math.sin(this.ang) * ASTEROID_SPEED;
 		this.xv *= SPACESPEED_DECAY_MULT;
 		this.yv *= SPACESPEED_DECAY_MULT;
+		if(this.invicibilityTimer > 0){
+			this.invicibilityTimer--;
+		}
 		this.superClassMove();
 	}
 

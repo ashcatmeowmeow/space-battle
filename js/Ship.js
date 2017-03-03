@@ -1,6 +1,7 @@
 const SPACESPEED_DECAY_MULT = 0.99;
 const THRUST_POWER = 0.15;
 const TURN_RATE = 0.03;
+const SHIP_COLLISION_RADIUS = 30;
 
 const MULTIPLIER_LIFESPAN = 150;
 
@@ -50,6 +51,13 @@ function shipClass() {
 		this.x = canvas.width/2;
 		this.y = canvas.height/2;
 	} // end of shipReset func
+
+	this.isOverlappingPoint = function(testX, testY){
+		var deltaX = testX-this.x;
+		var deltaY = testY-this.y;
+		var dist = Math.sqrt( (deltaX*deltaX) + (deltaY*deltaY) );
+		return (dist <= SHIP_COLLISION_RADIUS);
+	}
 
   this.checkMyShipCollisonAgainst = function(colliders) {
 		for(var c = 0; c < colliders.length; c++){

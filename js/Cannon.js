@@ -26,27 +26,28 @@ function cannonClass(){
       if(this.shotArray[i].isShotReadyToFire()){
         this.shotArray[i].shootFrom(ship);
       }
+
+      if( this.shotArray[i].hitTest(ship) ) {
+        resetGame();
+      }
+
       for(var currentCollider = 0; currentCollider < colliders.length; currentCollider++){
-        if( this.shotArray[i].hitTest(colliders[currentCollider]) ) {
+        if( this.shotArray[i].hitTest(colliders[currentCollider]) && colliders[currentCollider].invicibilityTimer == 0) {
 
           scoreMultiplierLifeSpan = MULTIPLIER_LIFESPAN;
           scoreMultiplier++;
 
-          if(colliders[currentCollider].type == 'asteroid'){
-            colliders[currentCollider].hp -= this.shotArray[i].attackValue;
-            if(colliders[currentCollider].hp < 0){
-              destroyAsteroid(colliders, colliders[currentCollider], currentCollider);
-              //THE EXPLOSION DOES THE KILLING, i think NOT THE RAIL ITSELF
-              /*
-              var tempExplosion = new explosionClass();
-              tempExplosion.reset(explosionPic);
-              explosions.push(tempExplosion);
-              tempExplosion.explodeAtPoint(colliders[currentCollider]);
-              */
-            }
+          colliders[currentCollider].hp -= this.shotArray[i].attackValue;
+          if(colliders[currentCollider].hp < 0){
+            this.shotArray[i].countdownTimeUntilCanHitAgain();
+
+            destroyAsteroid(colliders, colliders[currentCollider], currentCollider);
           }
 
-          this.shotArray[i].reset();
+          if(colliders[currentCollider].size == 'big'){
+            this.shotArray[i].reset();
+          }
+
           score += 100 * scoreMultiplier;
         }
       }//loop through colliders.
