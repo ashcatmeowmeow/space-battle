@@ -35,7 +35,6 @@ function cannonClass(){
         if( this.shotArray[i].hitTest(colliders[currentCollider]) && colliders[currentCollider].invicibilityTimer == 0) {
 
           scoreMultiplierLifeSpan = MULTIPLIER_LIFESPAN;
-          scoreMultiplier++;
 
           colliders[currentCollider].hp -= this.shotArray[i].attackValue;
           if(colliders[currentCollider].hp < 0){

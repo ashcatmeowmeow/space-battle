@@ -6,7 +6,7 @@ const SHIP_COLLISION_RADIUS = 30;
 const MULTIPLIER_LIFESPAN = 150;
 
 var endScore;
-var scoreMultiplier = 0;
+var scoreMultiplier = 1;
 var scoreMultiplierLifeSpan = MULTIPLIER_LIFESPAN;
 
 shipClass.prototype = new movingWrapPositionClass();

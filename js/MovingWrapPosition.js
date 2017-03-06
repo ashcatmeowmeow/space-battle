@@ -12,7 +12,6 @@ function movingWrapPositionClass() {
 
 	this.handleScreenWrap = function(){
 		if(this.x > canvas.width){
-			console.log('bonus!');
 			this.x = 0;
 		}
 		if(this.x < 0){

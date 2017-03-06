@@ -35,6 +35,7 @@ function railSlugClass() {
 		if(this.timeUntilCanHitAgain > 0 ){
 			this.timeUntilCanHitAgain--;
 			console.log(this.timeUntilCanHitAgain);
+		}
 	}
 
 	this.shootFrom = function(shipFiring){
@@ -73,9 +74,18 @@ function railSlugClass() {
 		if(this.shotLife > 0){
 			this.shotLife--;
 			this.superClassMove();
-		}
-		if(this.x > canvas.width){
-			console.log('buhbuhBONUS');
+			if(this.x > canvas.width){
+				scoreMultiplier*2;
+			}
+			if(this.x < 0){
+				console.log(scoreMultiplier);
+			}
+			if(this.y < 0){
+				console.log(scoreMultiplier);
+			}
+			if(this.y > canvas.height){
+				console.log(scoreMultiplier);
+			}
 		}
 	}
 
@@ -91,8 +101,8 @@ function railSlugClass() {
 
 	this.draw = function() {
 		if(this.shotLife > 0){
-			colorCircle(this.x,this.y, RAIL_DISPLAY_RADIUS, "red");
-			//colorRect(this.x,this.y,40,3,"red", ship.ang);
+			//colorCircle(this.x,this.y, RAIL_DISPLAY_RADIUS, "red");
+			colorRect(this.x,this.y,40,3,"red", ship.ang);
 		}
 	}
 }
